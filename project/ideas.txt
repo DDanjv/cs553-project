@@ -1,0 +1,32 @@
+ideas for project 
+    * task Manager
+        use can create to do lists 
+        and store them in data base 
+        under there user. each list will have an id 
+        . it will also store 
+        the user ids to know who can use it 
+
+    * library catalog
+        a user can create library 
+        catalogs and the add 
+        different book listing 
+        to them. catalogs will 
+        store user ids to know who can edit.
+
+    * simple drawing app that can store projects 
+        has a canvnas that a user can draw on in a 512 by 512 grid. 
+        there drawing can be safe to there user on database. 
+        will store user ids to know who can used and who made it.
+
+    * messager app
+        users can create chats bweteen each other. it would use 
+         ids for chat and also hold user ids to know who is in the chat.
+    * blog app
+         a user can create text post and save it to there list.
+
+    all project will have get, create, del, and edit functions
+
+    will use react of next js for frame work.
+    leaning to next js as react has been Depreciated.
+
+
