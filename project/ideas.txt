@@ -1,28 +1,61 @@
 ideas for project 
     * task Manager
-        use can create to do lists 
-        and store them in data base 
-        under there user. each list will have an id 
-        . it will also store 
-        the user ids to know who can use it 
+
+        a. A user can create lists and store them 
+        in the database under their user ID.
+
+        b. For students and people 
+        who want to be productive
+
+        c. A person can sign up, sign in, sign out, del account, create a 
+        list to, delete a list, edit a list, and view a list.
+
+        The primary focus will be user ID and list ID.
 
     * library catalog
-        a user can create library 
-        catalogs and the add 
-        different book listing 
-        to them. catalogs will 
-        store user ids to know who can edit.
+
+        A. This program serves to create and maintain library catalogs.
+
+        B. This app is for avid readers and librarians.
+
+        C. A person can sign up, sign in, sign out, del account, create a 
+        a group of books ids, add books ids, delete a group of books ids or a book id
+        , edit a group of books ids, and view book ids and there groups.
 
     * simple drawing app that can store projects 
-        has a canvnas that a user can draw on in a 512 by 512 grid. 
-        there drawing can be safe to there user on database. 
-        will store user ids to know who can used and who made it.
+
+        A. A person can create a canvas to then draw on a 512 by 512 grid. 
+        This can then be saved to their account
+
+        B. This is for anybody who just wants to make generic scribbles
+
+        C. A user can sign up, sign in, sign out, del account, 
+        create a canvas, edit a canvas, and delete a canvas.
 
     * messager app
-        users can create chats bweteen each other. it would use 
-         ids for chat and also hold user ids to know who is in the chat.
+
+        A. A user will be able to create chats with other 
+        users and send messages between them.
+
+        B. This is intended for 
+        anybody who just wants to chat With people they know
+
+        C. A user can sign up, sign in, sign out, delete account, create a group chat, 
+        send a message, edit a message, delete a message, Add a person to a computer, 
+        remove user from a group chat, 
+        leave a group chat, And delete a group chat.
+
     * blog app
-         a user can create text post and save it to there list.
+         a.a user can create text post and save it to there list.
+
+         A user will be able to create a and share posts about their daily life.
+
+         B. This is intended for people that are 
+         extroverted and want to share their daily life with others.
+
+         C. a user can Sign up, sign in, sign delete account, Create a blog, create a post, 
+         edit a post, edit a blog, delete a post, Delete a blog
+
 
     all project will have get, create, del, and edit functions
 
