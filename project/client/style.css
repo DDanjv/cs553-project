@@ -1,6 +1,26 @@
 body{
     background-color: rgba(42, 52, 53, 0.829);
     font-family: "Lucida Console", "Courier New", monospace;
+
+}
+
+.placeholder{
+    width: 144px;
+    height: 144px;
+}
+
+.blank{
+    width: 144px;
+    height: 144px;
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+
+}
+.debug{
+    color: rgb(255, 255, 255);
+    background-color: royalblue;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .base-block{
@@ -8,6 +28,15 @@ body{
     color: rgb(255, 255, 255);
     width: 300px;
     min-width: 200px;
+    height: auto;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 10px;
+    padding: 20px;
+}
+.invs-block{
+    color: rgb(255, 255, 255);
+    width: fit-content;
     height: auto;
     margin: auto;
     margin-top: 100px;
@@ -66,9 +95,13 @@ body{
 .base-grid{
     display: flex;
 }
+
 .base-view{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     background-color: rgba(25, 31, 32, 0.534);
-    color: rgb(255, 255, 255);
     width: auto;
     height: 400px;
     margin: auto;
@@ -103,4 +136,23 @@ body{
     color: black;
     border-radius: 5px;
     padding: 3px;
+}
+footer{
+    color: white;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 750px) {
+    .base-grid{
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media only screen and (max-width: 400px){
+    .nav-bar{
+        display: flex;
+        flex-direction: column;
+    }
 }
