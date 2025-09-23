@@ -9,6 +9,19 @@ body{
     height: 144px;
 }
 
+#testing{
+    color: white;
+    background-color: royalblue;
+    text-align: center;
+    margin-top: 20px;
+}
+#testing2{
+    color: rgb(255, 255, 255);
+    background-color: rgb(225, 65, 65);
+    text-align: left;
+    margin-top: 20px;
+}
+
 .blank{
     width: 144px;
     height: 144px;
