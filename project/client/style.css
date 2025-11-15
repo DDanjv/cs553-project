@@ -3,6 +3,9 @@ body{
     font-family: "Lucida Console", "Courier New", monospace;
 
 }
+h1{
+    text-align: center;
+}
 
 .placeholder{
     width: 144px;

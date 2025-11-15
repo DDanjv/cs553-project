@@ -13,14 +13,14 @@
         <a href="post.html" class="nav-link">post</a>
         <a href="register.html" class="nav-link">register</a>
     </div>    
-    <form class="base-block">
+    <form id="register-form"class="base-block">
         <p class="base-item">register</p>
-        <input type="text" placeholder="username" class="input-field"/>
-        <input type="text" placeholder="email" class="input-field"/> 
-        <input type="password" placeholder="password" class="input-field"/>
-        <input type="password" placeholder="renter password" class="input-field"/>
-        <button class="base-button">Register now</button>
+        <input name="username" type="text" placeholder="username" class="input-field"/>
+        <input name="email" type="text" placeholder="email" class="input-field"/> 
+        <input name="password" type="password" placeholder="password" class="input-field"/>
+        <input name="repassword" type="password" placeholder="renter password" class="input-field"/>
+        <button id="register-button" class="base-button">Register now</button>
     </form>
-    
+    <script src="scripts/register.js"></script>
 </body>
 </html>
