@@ -5,7 +5,7 @@ const app = express()
 app.use(express.json())
 
 const userRoutes = require("./server/routes/user")
-const recipeRoutes = require("./server/routes/post")
+const postRoutes = require("./server/routes/post")
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");  
@@ -14,9 +14,8 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use("/users", userRoutes)
-
-
+app.use("/user", userRoutes)
+app.use("/post", postRoutes)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => console.log(`Server started on port ${PORT}!!`))

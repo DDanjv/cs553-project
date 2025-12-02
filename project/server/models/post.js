@@ -1,4 +1,5 @@
 const mysql = require('mysql2')
+const con = require("./db_connect")
 
 async function createPostTable() {
     let sql = 

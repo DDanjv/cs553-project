@@ -20,6 +20,24 @@ function login(e) {
         let userJSON = JSON.stringify(user) 
         console.log(JSON.parse(userJSON))
 
+        const url = '/login'
+        const fetchOptions = { method: 'POST' } // base options
+        fetch(url, Object.assign({}, fetchOptions, {
+            headers: { 'Content-Type': 'application/json' },
+            body: userJSON
+        }))
+        .then(res => res.ok ? res.json() : res.json().then(err => Promise.reject(err)))
+        .then(data => {
+            console.log('login response', data)
+            if (data && data.token) {
+                // store token/session as needed
+                localStorage.setItem('authToken', data.token)
+            }
+        })
+        .catch(err => {
+            console.error('login request failed', err)
+        })
+
         if(document.querySelector("h1") === null){
             var para = document.createElement("h1")
             var  txt = document.createTextNode("welcome")
