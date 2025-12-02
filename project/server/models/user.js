@@ -15,7 +15,7 @@ async function createUserTable() {
 
 // creates table if not there
 createUserTable()
-
+// pass separately
 //crud
 
 //get functions
@@ -66,7 +66,21 @@ async function login(Username, Password) {
     return cuser[0]
 }
 
-module.exports = { getAllUsers, login }
+//delete user
+
+async function deleteUser(id) {
+    let sql = "DELETE FROM User WHERE id = ?;";
+    return await con.query(sql, [id]);
+}
+
+
+module.exports = { getAllUsers, 
+                    login, 
+                    getUser, 
+                    createUser, 
+                    editUserName, 
+                    editUserEmail, 
+                    editUserPaswword };
 
 
 

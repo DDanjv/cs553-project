@@ -1,53 +1,104 @@
-// 1. import con to access database
-const con = require("./db_connect")
-// 2. create function that creates entity table if doesn't exist already
-async function createUserTable() {
-  let sql = `
-    CREATE TABLE IF NOT EXISTS User (
-      UserID INT NOT NULL AUTO_INCREMENT,
-      Username VARCHAR(255) NOT NULL UNIQUE,
-      Email VARCHAR(255) NOT NULL UNIQUE,
-      Password VARCHAR(255) NOT NULL,
-      CONSTRAINT userPK PRIMARY KEY(userID)
-    );
-  `
-  await con.query(sql)
-}
-// 3. call function that creates table
-createUserTable()
+const express = require("express")
+const User = require("../models/user")
+const router = express.Router()
 
-// 4. create CRUD functions
-// READ for grabbing all users
-async function getAllUsers() {
-  let sql = `
-    SELECT * FROM User;
-  `
-  return await con.query(sql)
-}
+router
 
-/* Eventually will add all CRUD operations:
-Create: Register function
-Read: Login function
-*/
+.get('/getUsers', async (req, res) => {
+  try {
+    const user = await User.getUser(req.body.id)
+    res.send(user)
+  } catch(err) {
+    res.status(401).send({message: err.message})
+  }
+})
 
-// let user = {
-//   username: "cathy123",
-//   password: "icecream"
-// }
-async function login(user) {
-  let sql = `
-    SELECT * FROM User
-    WHERE Username="${user.username}"
-  `
-  let cuser = await con.query(sql)
-  return cuser[0]
-}
+.delete('/deleteUser', async (req, res) => {
+  try {
+    const result = await User.deleteUser(req.body.id)
 
-/*
-Update: Update password/name function
-Delete: Delete user account function*/
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: "User not found" });
+    }
 
-/* We need to add each function we create to "module.exports", or 
-   else cannot access the functions in our route files*/
-// 5. export all functions so accessible by corresponding route file
-module.exports = { getAllUsers, login }
+    res.send({ message: "User deleted successfully" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+})
+
+.put('/editUserName', async (req, res) => {
+  try{
+    const user = User.editUserName(id, newUsername)
+  }
+  catch(err){
+    res.status(500).send({ message: err.message });
+  }
+})
+
+.put('/editUserEmail', async (req, res) => {
+  try{
+    const user = User.editUserEmail(req.body.id, req.body.newEmail)
+  }
+  catch(err){
+    res.status(500).send({ message: err.message });
+  }
+})
+
+.put('/editUserPassword', async (req, res) => {
+  try{
+    const user = User.editUserPaswword(req.body.id, req.body.password, req.body.newPassword)
+  }
+  catch(err){
+    res.status(500).send({ message: err.message });
+  }
+})
+.delete('/deleteUser', async (req, res) => {
+  try{
+    const user = User.deleteUser(req.body.id)
+  }
+  catch(err){
+    res.status(500).send({ message: err.message });
+  }
+})
+
+.post('/createUser',async (req,res) => {
+  try{
+    const user = await User.createUser(req.body.Username,req.body.Email,req.body.Password)
+
+    if(!user || result.affectedRows === 0){
+      return res.status(400).send({ message: "invalid user" });
+    }
+    res.send({
+      id: result.insertId,
+      Username,
+      Email
+    });
+  }
+  catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+})
+
+.post('/login', async(req, res) => {
+  try {  
+
+    const user = await User.login(req.body.Username, req.body.Password); 
+
+    if (!user){
+      return res.status(401).send({ message: "Invalid login" });
+    }
+
+    res.send({
+      id: result.insertId,
+      Username,
+      Email
+    });
+
+
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+})
+
+module.exports = router

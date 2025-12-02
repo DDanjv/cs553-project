@@ -1,0 +1,75 @@
+const express = require("express")
+const User = require("../models/routes")
+const router = express.Router()
+
+
+router
+
+.post('/createPost',async (req,res) => {
+    try {
+        const post = await Post.getUSer(req.body.user_id,req.body.title,req.body.content)
+        if(!req.body.title){
+            return res.status(400).send({ message: "exist already" });
+        }
+        res.send({
+            id: result.insertId,
+            user_id,
+            title,
+            content
+        })
+    } catch (error) {
+        res.status(500).send({ message: err.message });
+    }
+})
+
+.get('/getPost',async (req,res) => {
+    try {
+        const post = await Post.getPost(req.body.id)
+        res.send(post)
+        
+    } catch (error) {
+        res.status(500).send({ message: err.message });
+    }
+})
+
+.get('/getAllPost',async (req,res) => {
+    try {
+        const posts = await Post.getAllPosts()
+        res.send(posts)
+        
+    } catch (error) {
+        res.status(500).send({ message: err.message });
+    }
+})
+
+.put('/editTitle',async (req,res) => {
+    try {
+        const post = await Post.editPostTitle(req.body.id, req.body.newTitle)
+        res.send(post)
+        
+    } catch (error) {
+        res.status(500).send({ message: err.message });
+    }
+})
+
+.put('/editPost',async (req,res) => {
+    try {
+        const post = await Post.editPostContent(req.body.id, req.body.newContent)
+        res.send(post)
+        
+    } catch (error) {
+        res.status(500).send({ message: err.message });
+    }
+})
+
+.delete('/deletePost',async (req,res) => {
+    try {
+        const post = await Post.deletePost(req.body.id)
+        res.send(post)
+        
+    } catch (error) {
+        res.status(500).send({ message: err.message });
+    }
+})
+
+module.exports = router
