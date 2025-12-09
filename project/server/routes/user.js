@@ -71,7 +71,7 @@ router
       }
 
       res.send({
-        id: user.insertId,
+        id: user.id,
         Username: req.body.Username,
         Email: req.body.Email
       });

@@ -7,15 +7,15 @@ router
 
 .post('/createPost',async (req,res) => {
     try {
-        const post = await Post.getUSer(req.body.user_id,req.body.title,req.body.content)
+        const post = await Post.createPost(req.body.user_id,req.body.title,req.body.content)
+
         if(!req.body.title){
             return res.status(400).send({ message: "exist already" });
         }
         res.send({
-            id: result.insertId,
-            user_id,
-            title,
-            content
+            id: post.id,
+            title: post.title,
+            content: post.content
         })
     } catch (error) {
         res.status(500).send({ message: err.message });

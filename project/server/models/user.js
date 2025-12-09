@@ -70,6 +70,8 @@ async function login(Username, Password) {
 //delete user
 
 async function deleteUser(id) {
+    let sqlpost  = "DELETE FROM posts WHERE user_id = ?;";
+    await con.query(sqlpost, [id]);
     let sql = "DELETE FROM User WHERE id = ?;";
     return await con.query(sql, [id]);
 }
