@@ -1,5 +1,5 @@
 const express = require("express")
-const User = require("../models/post")
+const Post = require("../models/post")
 const router = express.Router()
 
 
@@ -65,7 +65,7 @@ router
 .delete('/deletePost',async (req,res) => {
     try {
         const post = await Post.deletePost(req.body.id)
-        res.send(post)
+        res.send("poost del")
         
     } catch (error) {
         res.status(500).send({ message: err.message });

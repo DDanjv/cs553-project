@@ -46,4 +46,5 @@ module.exports = {
     getPost,
     editPostTitle,
     editPostContent,
+    deletePost
 }

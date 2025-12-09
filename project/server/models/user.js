@@ -29,7 +29,7 @@ async function getAllUsers() {
     return await con.query(sql)
 }
 async function getUser(id) {
-    let sql = "SELECT * FROM User WHERE id = ?;";
+    let sql = "SELECT * FROM User WHERE id = ?;"
     return await con.query(sql, [id]);
 }
 
@@ -52,7 +52,7 @@ async function editUserEmail(id, newEmail) {
     let sql = "UPDATE User SET Email = ? WHERE id = ?;";
     return await con.query(sql, [newEmail, id]);
 }
-async function editUserPaswword(id, password, newPassword) {
+async function editUserPassword(id, password, newPassword) {
     if (password === newPassword) {
         throw new Error("New password cannot be the same as the old password.");
     }
@@ -64,8 +64,7 @@ async function editUserPaswword(id, password, newPassword) {
 
 async function login(Username, Password) {
     let sql = "SELECT * FROM User WHERE Username = ? AND Password = ?;"
-    let [cuser] = await con.query(sql, [Username, Password])
-    return cuser[0]
+    return await con.query(sql, [Username, Password])
 }
 
 //delete user
@@ -82,7 +81,9 @@ module.exports = { getAllUsers,
                     createUser, 
                     editUserName, 
                     editUserEmail, 
-                    editUserPaswword };
+                    editUserPassword,
+                    deleteUser
+                 };
 
 
 
