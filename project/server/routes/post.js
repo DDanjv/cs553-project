@@ -31,6 +31,7 @@ router
 .get('/getAllPost',async (req,res) => {
     try {
         const posts = await Post.getAllPosts()
+        console.log(posts)
         res.send(posts)
         
     } catch (error) {

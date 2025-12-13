@@ -83,14 +83,24 @@ function register(e) {
     console.log(username,email,password,repassword)
     if(password === repassword && password !== "" && repassword !== ""){
         const user = {
-            username: username,
-            email: email,
-            password: password
+            Username: username,
+            Email: email,
+            Password: password
         }
         let userJSON = JSON.stringify(user) 
         console.log(JSON.parse(userJSON))
 
-        
+        fetchData("/user/createUser", user, "POST")
+        .then(data => {
+            if(!data.message) {
+            setCurrentUser(data)
+            window.location.href = "login.html"
+            }
+        })
+        .catch(err => {
+            let errorSection = document.getElementById("error")
+            errorSection.innerText = err.message
+        })
 
         
         if(document.querySelector("h1") === null){
@@ -146,6 +156,6 @@ export function getCurrentUser() {
 
 export function removeCurrentUser() {
   localStorage.removeItem('user')
-  window.location.href = "index.html"
+  window.location.href = "login.html"
 }
 

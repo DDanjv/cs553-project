@@ -1,3 +1,5 @@
+import { fetchData } from "./main.js"
+
 console.log("post")
 
 var postform = document.forms[0]
@@ -55,4 +57,15 @@ function post(e) {
     writepost = postform[1].value=""
 
     
+}
+
+function getPosts() {
+    fetchData("/post/getAllPost", '', "GET")
+            .then(data => {
+                
+            })
+            .catch(err => {
+                let errorSection = document.getElementById("error")
+                errorSection.innerText = err.message
+            })
 }

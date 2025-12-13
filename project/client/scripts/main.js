@@ -1,36 +1,40 @@
 import { getCurrentUser, removeCurrentUser } from "./user.js";
 
 //navbar implementation
-/*let nav = document.querySelector("nav")
+let nav = document.querySelector(".nav-bar")
 if(getCurrentUser()) {
   nav.innerHTML = `
-    <ul>
-        <li><a href="./index.html">HOME</a></li>
-        <li id="logout"><a>LOGOUT</a></li>
-    </ul>
+    <a href="./post.html" class="nav-link">post</a>
+    <a class="nav-link" id="logout">LOGOUT</a>
   `
 } else {
   nav.innerHTML = `
-    <ul>
-      <li><a href="./index.html">HOME</a></li>
-      <li><a href="./login.html">LOGIN</a></li>
-      <li><a href="./register.html">REGISTER</a></li>
-    </ul>
+    <a href="./login.html" class="nav-link">login</a>
+    <a href="./register.html" class="nav-link">register</a>
   `
 }
 
 let logoutBtn = document.getElementById("logout")
-if(logoutBtn) logoutBtn.addEventListener('click', removeCurrentUser)*/
+if(logoutBtn) logoutBtn.addEventListener('click', removeCurrentUser)
 
 // Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {
-  const response = await fetch(`http://localhost:3000${route}`, {
-    method: methodType, // *POST, PUT, DELETE, etc.
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data) // body data type must match "Content-Type" header
-  });
+  let response;
+  if(methodType === 'GET'){
+    response = await fetch(
+      `http://localhost:3000${route}${data}`
+    );
+  }
+  else{
+    response = await fetch(`http://localhost:3000${route}`, {
+      method: methodType, // *POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+  }
+  console.log(response)
   if (response.ok) {
     return await response.json(); // parses JSON response into native JavaScript objects
   } else {
