@@ -12,11 +12,7 @@ router
         if(!req.body.title){
             return res.status(400).send({ message: "exist already" });
         }
-        res.send({
-            id: post.id,
-            title: post.title,
-            content: post.content
-        })
+        res.send(post)
     } catch (error) {
         res.status(500).send({ message: err.message });
     }
