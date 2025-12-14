@@ -2,6 +2,7 @@ import { fetchData, navbar } from "./main.js"
 import { getCurrentUser, removeCurrentUser } from "./user.js";
 
 let user = getCurrentUser()
+console.log(user)
 
 navbar()
 

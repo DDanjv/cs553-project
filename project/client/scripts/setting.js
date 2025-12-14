@@ -2,6 +2,7 @@ import { fetchData , navbar } from "./main.js"
 import { getCurrentUser, removeCurrentUser, setCurrentUser } from "./user.js";
 
 let user = getCurrentUser()
+console.log(user)
 navbar()
 
 // Form elements
@@ -61,7 +62,7 @@ function editUserName(newUsername) {
             else console.error(err);
         });
 }
-function editUserEmail(id, newEmail) {
+function editUserEmail(newEmail) {
     fetchData("/user/editUserEmail", {id: user.id, newEmail: newEmail}, "PUT")
         .then(data => {
             console.log(data)
@@ -92,6 +93,9 @@ function editUserPassword(password, newPassword) {
     
 }
 function deleteUser(password) {
+    console.log(user)
+    //console.log(JSON.stringify(getCurrentUser()))
+    console.log(user.id)
     fetchData("/user/deleteUser/", user.id, "DELETE")
         .then(data => {
             console.log(data)
