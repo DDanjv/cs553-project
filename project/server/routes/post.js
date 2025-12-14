@@ -51,7 +51,7 @@ router
 
 .put('/editTitle',async (req,res) => {
     try {
-        const post = await Post.editPostTitle(req.body.id, req.body.newTitle)
+        const post = await Post.editPostTitle(req.body.id, req.body.newTitle, req.body.user_id)
         res.send(post)
         
     } catch (error) {
@@ -59,9 +59,9 @@ router
     }
 })
 
-.put('/editPost',async (req,res) => {
+.put('/editPostContent',async (req,res) => {
     try {
-        const post = await Post.editPostContent(req.body.id, req.body.newContent)
+        const post = await Post.editPostContent(req.body.id, req.body.newContent, req.body.user_id)
         res.send(post)
         
     } catch (error) {

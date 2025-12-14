@@ -29,13 +29,13 @@ async function getPostsByUserId(user_id) {
 }
 
 //edit post
-async function editPostTitle(id, newTitle) {
-    let sql = 'UPDATE posts SET title = ? WHERE id = ?;'
-    return await con.query(sql, [newTitle, id])
+async function editPostTitle(id, newTitle, user_id) {
+    let sql = 'UPDATE posts SET title = ? WHERE id = ? AND user_id = ?;'
+    return await con.query(sql, [newTitle, id, user_id])
 }
-async function editPostContent(id, newContent) {
-    let sql = 'UPDATE posts SET content = ? WHERE id = ?;'
-    return await con.query(sql, [newContent, id])
+async function editPostContent(id, newContent, user_id) {
+    let sql = 'UPDATE posts SET content = ? WHERE id = ? AND user_id = ?;'
+    return await con.query(sql, [newContent, id, user_id])
 }
 
 //delete post
