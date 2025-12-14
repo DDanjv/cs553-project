@@ -18,14 +18,12 @@ router
   })
 
   // Delete 
-  .delete('/deleteUser', async (req, res) => {
+  .delete('/deleteUser/:id', async (req, res) => {
     try {
-      const result = await User.deleteUser(req.body.id);
-
+      const result = await User.deleteUser(req.params.id);
       if (result.affectedRows === 0) {
         return res.status(404).send({ message: "User not found" });
       }
-
       res.send({ message: "User deleted successfully" });
     } catch (err) {
       res.status(500).send({ message: err.message });
