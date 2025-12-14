@@ -1,7 +1,8 @@
-import { fetchData } from "./main.js"
-import { getCurrentUser, removeCurrentUser } from "./user.js";
+import { fetchData , navbar } from "./main.js"
+import { getCurrentUser, removeCurrentUser, setCurrentUser } from "./user.js";
 
 let user = getCurrentUser()
+navbar()
 
 // Form elements
 let emailForm = document.getElementById("setting-edit-email")
@@ -14,26 +15,59 @@ if(!user){
     window.location.href = "login.html"
 }
 
-async function editUserName(params) {
-    fetchData("/user/editUserName", {id: user.id, newUsername: params}, "PUT")
-        .then(data => {
-            console.log(data)
-            //update current user info
-            user.Username = params
-            localStorage.setItem("currentUser", JSON.stringify(user))
-        })
-        .catch(err => {
-            if (errorSection) errorSection.innerText = err.message;
-            else console.error(err);
-        });
+if (emailForm) {
+    emailForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        editUserEmail(emailForm[0].value);
+    });
 }
 
-async function editUserEmail(id, newEmail) {
-    fetchData("/user/editUserEmail", {id: user.id, newUsername: params}, "PUT")
+if (passwordForm) {
+    passwordForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        editUserPassword(
+            passwordForm[0].value,
+            passwordForm[1].value
+        );
+    });
+}
+
+if (deleteForm) {
+    deleteForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        deleteUser(deleteForm[0].value);
+    });
+}
+
+if (usernameForm) {
+    usernameForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        editUserName(usernameForm[0].value);
+    });
+}
+
+function editUserName(newUsername) {
+    fetchData("/user/editUserName", {id: user.id, newUsername: newUsername}, "PUT")
         .then(data => {
             console.log(data)
-            //update current user info
-            user.Username = params
+            user.Username = newUsername
+
+            setCurrentUser(user)
+            localStorage.setItem("currentUser", JSON.stringify(user))
+            navbar()
+        })
+        .catch(err => {
+            if (errorSection) errorSection.innerText = err.message;
+            else console.error(err);
+        });
+}
+function editUserEmail(id, newEmail) {
+    fetchData("/user/editUserEmail", {id: user.id, newEmail: newEmail}, "PUT")
+        .then(data => {
+            console.log(data)
+            user.Email = newEmail
+
+            setCurrentUser(user)
             localStorage.setItem("currentUser", JSON.stringify(user))
         })
         .catch(err => {
@@ -44,13 +78,12 @@ async function editUserEmail(id, newEmail) {
     
 }
 
-async function editUserPassword(id, password, newPassword) {
-    fetchData("/user/editUserPassword", {id: user.id, newUsername: params}, "PUT")
+function editUserPassword(password, newPassword) {
+    console.log(password, newPassword)
+    fetchData("/user/editUserPassword", {id: user.id, password: password, newPassword: newPassword}, "PUT")
         .then(data => {
             console.log(data)
-            //update current user info
-            user.Username = params
-            localStorage.setItem("currentUser", JSON.stringify(user))
+
         })
         .catch(err => {
             if (errorSection) errorSection.innerText = err.message;
@@ -58,13 +91,13 @@ async function editUserPassword(id, password, newPassword) {
         });
     
 }
-async function deleteUser(password) {
+function deleteUser(password) {
     fetchData("/user/deleteUser/", user.id, "DELETE")
         .then(data => {
             console.log(data)
             //update current user info
-            user.Username = params
-            localStorage.setItem("currentUser", JSON.stringify(user))
+            removeCurrentUser()
+            window.location.href = "register.html"
         })
         .catch(err => {
             if (errorSection) errorSection.innerText = err.message;

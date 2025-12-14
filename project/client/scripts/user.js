@@ -1,4 +1,5 @@
-import { fetchData } from "./main.js"
+import { fetchData, navbar } from "./main.js"
+navbar()
 
 var loginform = document.getElementById("login")
 if(loginform){

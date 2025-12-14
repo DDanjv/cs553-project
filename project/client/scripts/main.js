@@ -1,33 +1,35 @@
 import { getCurrentUser, removeCurrentUser } from "./user.js";
 
 //navbar implementation
-let nav = document.querySelector(".nav-bar")
-let user 
-let userDisplay
-if(getCurrentUser()) {
-  user = getCurrentUser()
-  nav.innerHTML = `
-    <a href="./setting.html" class="nav-link">${user.Username}</a>
-    <a href="./post.html" class="nav-link">post</a>
-    <a class="nav-link" id="logout">LOGOUT</a>
-  `;
-  /*userDisplay = document.createElement("p")
-  userDisplay.id = "userDisplay"
-  userDisplay.textContent = user.Username
 
-  // insert directly AFTER the navbar
-  nav.insertAdjacentElement("afterend", userDisplay)*/
+export async function navbar() {
+  console.log("navbar called")
+  let nav = document.querySelector(".nav-bar")
   
+  let user 
 
-} else {
-  nav.innerHTML = `
-    <a href="./login.html" class="nav-link">login</a>
-    <a href="./register.html" class="nav-link">register</a>
-  `
+
+  if(getCurrentUser()) {
+    user = getCurrentUser()
+    localStorage.setItem("currentUser", JSON.stringify(user))
+    nav.innerHTML = `
+      <a href="./setting.html" class="nav-link">${user.Username}</a>
+      <a href="./post.html" class="nav-link">post</a>
+      <a class="nav-link" id="logout">LOGOUT</a>
+    `;
+
+  } else {
+    nav.innerHTML = `
+      <a href="./login.html" class="nav-link">login</a>
+      <a href="./register.html" class="nav-link">register</a>
+    `
+  }
+
+
+  let logoutBtn = document.getElementById("logout")
+  if(logoutBtn) logoutBtn.addEventListener('click', removeCurrentUser)
 }
 
-let logoutBtn = document.getElementById("logout")
-if(logoutBtn) logoutBtn.addEventListener('click', removeCurrentUser)
 
 // Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {

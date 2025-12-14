@@ -1,13 +1,14 @@
-import { fetchData } from "./main.js"
+import { fetchData, navbar } from "./main.js"
 import { getCurrentUser, removeCurrentUser } from "./user.js";
 
 let user = getCurrentUser()
+
+navbar()
 
 var postform = document.getElementById("post-maker")
 var postViewer = document.getElementById("post-viewer")
 var postuser = document.getElementById("post-user")
 const errorSection = document.getElementById("error")
-
 getPosts()
 if(user){
     getUserPosts()
