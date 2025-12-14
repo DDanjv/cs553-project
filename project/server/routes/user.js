@@ -69,7 +69,7 @@ router
       }
 
       res.send({
-        id: user.id,
+        id: user.insertId,
         Username: req.body.Username,
         Email: req.body.Email
       });

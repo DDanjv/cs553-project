@@ -11,6 +11,7 @@ export async function navbar() {
 
   if(getCurrentUser()) {
     user = getCurrentUser()
+    console.log(user)
     localStorage.setItem("currentUser", JSON.stringify(user))
     nav.innerHTML = `
       <a href="./setting.html" class="nav-link">${user.Username}</a>

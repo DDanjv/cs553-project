@@ -95,7 +95,7 @@ function register(e) {
         .then(data => {
             if(!data.message) {
             setCurrentUser(data)
-            window.location.href = "login.html"
+            window.location.href = "post.html"
             }
         })
         .catch(err => {
