@@ -37,6 +37,8 @@ function post(e) {
         fetchData("/post/createPost", post, "POST")
             .then(data => {
                 console.log(data)
+                getUserPosts();
+                getPosts()
             })
             .catch(err => {
                 if (errorSection) errorSection.innerText = err.message;
@@ -81,6 +83,7 @@ function post(e) {
 }
 
 function getPosts() {
+    postViewer.innerHTML = "";
     fetchData("/post/getAllPost", '', "GET")
             .then(data => {
                 for (let index = 0; index < data.length; index++) {
@@ -100,6 +103,7 @@ function getPosts() {
 }
 
 function getUserPosts() {
+    postuser.innerHTML = "";
     fetchData(`/post/getUserPosts`, `?user_id=${user.id}`, "GET")
             .then(data => {
                 for (let index = 0; index < data.length; index++) {
@@ -108,7 +112,7 @@ function getUserPosts() {
                    div.innerHTML = `
                         <p> ${data[index].id}${data[index].title}</p>
                         <p> ${data[index].content} </p>
-                        <button class="base-button-delete">delete post</button>
+                        <p class="base-button-delete">delete post</p>
                    `;
                    postuser.appendChild(div);
                    div.querySelector(".base-button-delete").addEventListener('click', () => {
@@ -122,10 +126,12 @@ function getUserPosts() {
             });
 }
 function deletePost(id) {
-    fetchData(`/deletePost`, `?id=${id}`, "DELETE")
-        .then(() => {
-            postuser.innerHTML = "";
+    console.log("Deleting post with id:", id);
+    fetchData(`/post/deletePost/`, id, "DELETE")
+        .then(data => {
+            console.log(data);
             getUserPosts();
+            getPosts()
         })
         .catch(err => {
             if (errorSection) errorSection.innerText = err.message;

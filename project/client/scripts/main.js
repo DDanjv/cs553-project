@@ -31,10 +31,15 @@ if(logoutBtn) logoutBtn.addEventListener('click', removeCurrentUser)
 
 // Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {
+  console.log(`http://localhost:3000${route}${data}`)
   let response;
   if(methodType === 'GET' || methodType === 'DELETE'){
+
     response = await fetch(
-      `http://localhost:3000${route}${data}`
+      `http://localhost:3000${route}${data}`, {
+      method: methodType, 
+      headers: {}
+    }
     );
 
   }
@@ -47,7 +52,6 @@ export async function fetchData(route = '', data = {}, methodType) {
       body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
   }
-  console.log(response)
   if (response.ok) {
     return await response.json(); // parses JSON response into native JavaScript objects
   } else {

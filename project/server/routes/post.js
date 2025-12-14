@@ -69,10 +69,12 @@ router
     }
 })
 
-.delete('/deletePost',async (req,res) => {
+.delete('/deletePost/:id',async (req,res) => {
     try {
-        const post = await Post.deletePost(req.query.id)
-        res.send("poost del")
+        console.log("Delete request received for id:", req.params.id);
+        const post = await Post.deletePost(req.params.id)
+        res.json({ message: "post deleted" });
+
         
     } catch (error) {
         res.status(500).send({ message: err.message });
