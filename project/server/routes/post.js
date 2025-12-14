@@ -1,5 +1,6 @@
 const express = require("express")
 const Post = require("../models/post")
+const { con } = require("../models/db_connect")
 const router = express.Router()
 
 
@@ -20,8 +21,17 @@ router
 
 .get('/getPost',async (req,res) => {
     try {
-        const post = await Post.getPost(req.body.id)
+        const post = await Post.getPost(req.query.id)
         res.send(post)
+        
+    } catch (error) {
+        res.status(500).send({ message: err.message });
+    }
+})
+.get('/getUserPosts',async (req,res) => {
+    try {
+        const posts = await Post.getPostsByUserId(req.query.user_id)
+        res.send(posts)
         
     } catch (error) {
         res.status(500).send({ message: err.message });
@@ -31,7 +41,7 @@ router
 .get('/getAllPost',async (req,res) => {
     try {
         const posts = await Post.getAllPosts()
-        console.log(posts)
+        //console.log(posts)
         res.send(posts)
         
     } catch (error) {
@@ -61,7 +71,7 @@ router
 
 .delete('/deletePost',async (req,res) => {
     try {
-        const post = await Post.deletePost(req.body.id)
+        const post = await Post.deletePost(req.query.id)
         res.send("poost del")
         
     } catch (error) {

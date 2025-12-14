@@ -32,10 +32,11 @@ if(logoutBtn) logoutBtn.addEventListener('click', removeCurrentUser)
 // Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {
   let response;
-  if(methodType === 'GET'){
+  if(methodType === 'GET' || methodType === 'DELETE'){
     response = await fetch(
       `http://localhost:3000${route}${data}`
     );
+
   }
   else{
     response = await fetch(`http://localhost:3000${route}`, {

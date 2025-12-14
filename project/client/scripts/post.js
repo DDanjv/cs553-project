@@ -1,16 +1,24 @@
 import { fetchData } from "./main.js"
+import { getCurrentUser, removeCurrentUser } from "./user.js";
 
-console.log("post")
+let user = getCurrentUser()
+
 var postform = document.getElementById("post-maker")
 var postViewer = document.getElementById("post-viewer")
+var postuser = document.getElementById("post-user")
+const errorSection = document.getElementById("error")
+
 getPosts()
+if(user){
+    getUserPosts()
+}else{
+    window.location.href = "login.html"
+}
 
-
-
-console.log(postform)
 if(postform){
     postform.addEventListener('submit', post)
 }
+
 
 function post(e) {
     e.preventDefault()
@@ -19,11 +27,21 @@ function post(e) {
     var writepost = postform[1].value
     if(title !== "" && writepost !== ""){
         const post = {
+            user_id: user.id,
             title: title,
-            writepost: writepost
+            content: writepost
         }
-        let userJSON = JSON.stringify(post) 
-        console.log(JSON.parse(userJSON))
+        //let userJSON = JSON.stringify(post) 
+        //console.log(JSON.parse(userJSON))
+
+        fetchData("/post/createPost", post, "POST")
+            .then(data => {
+                console.log(data)
+            })
+            .catch(err => {
+                if (errorSection) errorSection.innerText = err.message;
+                else console.error(err);
+            });
 
         if(document.querySelector("h1") === null){
             var para = document.createElement("h1")
@@ -67,7 +85,7 @@ function getPosts() {
             .then(data => {
                 for (let index = 0; index < data.length; index++) {
                    postViewer.innerHTML += `
-                    <div>
+                    <div class = "base-item">
                         <p> ${data[index].title}</p>
                         <p> ${data[index].content} </p>
                     </div>
@@ -76,9 +94,43 @@ function getPosts() {
                 }
             })
             .catch(err => {
-                let errorSection = document.getElementById("error")
-                errorSection.innerText = err.message
+                if (errorSection) errorSection.innerText = err.message;
+                else console.error(err);
+            });
+}
+
+function getUserPosts() {
+    fetchData(`/post/getUserPosts`, `?user_id=${user.id}`, "GET")
+            .then(data => {
+                for (let index = 0; index < data.length; index++) {
+                   const div = document.createElement("div");
+                   div.className = "base-item-user";
+                   div.innerHTML = `
+                        <p> ${data[index].id}${data[index].title}</p>
+                        <p> ${data[index].content} </p>
+                        <button class="base-button-delete">delete post</button>
+                   `;
+                   postuser.appendChild(div);
+                   div.querySelector(".base-button-delete").addEventListener('click', () => {
+                        deletePost(data[index].id)
+                   });
+                }
             })
+            .catch(err => {
+                if (errorSection) errorSection.innerText = err.message;
+                else console.error(err);
+            });
+}
+function deletePost(id) {
+    fetchData(`/deletePost`, `?id=${id}`, "DELETE")
+        .then(() => {
+            postuser.innerHTML = "";
+            getUserPosts();
+        })
+        .catch(err => {
+            if (errorSection) errorSection.innerText = err.message;
+            else console.error(err);
+        });
 }
 
 

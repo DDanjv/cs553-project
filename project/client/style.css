@@ -51,6 +51,17 @@ h1{
     border-radius: 10px;
     padding: 20px;
 }
+.base-block-flexx{
+    background-color: rgba(25, 31, 32, 0.534);
+    color: rgb(255, 255, 255);
+    width: 300px;
+    min-width: 200px;
+    height: auto;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 10px;
+    padding: 20px;
+}
 .invs-block{
     color: rgb(255, 255, 255);
     width: fit-content;
@@ -93,6 +104,16 @@ h1{
     padding: 10px;
     text-align: center;
 }
+.base-item-user{
+    background-color: rgba(25, 31, 32, 0.534);
+    color: rgb(255, 255, 255);
+    width: fit-content;
+    height: auto;
+    margin: auto;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
 .base-button{
     background-color: rgba(25, 31, 32, 0.534);
     color: rgb(255, 255, 255);
@@ -105,12 +126,24 @@ h1{
     padding: 8px;
 
 }
+.base-button-delete{
+    background-color: rgba(56, 25, 34, 0.534);
+    color: rgb(255, 255, 255);
+    border: none;
+    width: fit-content;
+    height: auto;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 8px;
+}
 .base-button:active{
     background-color: rgba(255, 255, 255, 0.534);
     color: black;
 }
 .base-grid{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .base-view{
@@ -126,6 +159,23 @@ h1{
     border-radius: 10px;
     padding: 20px;
     text-align: center;
+    overflow-y: auto;
+}
+.base-view-col{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(25, 31, 32, 0.534);
+    width: auto;
+    height: 610px;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    overflow-y: auto;
 }
 .nav-bar{
     display: flex;
@@ -171,5 +221,15 @@ footer{
     .nav-bar{
         display: flex;
         flex-direction: column;
+    }
+}
+@media only screen and (min-width: 900px){
+    .base-block-flexx{
+        width: 700px;
+        height: 700px;
+    }
+    .base-view{
+        width: 665px;
+        height: 610px;
     }
 }

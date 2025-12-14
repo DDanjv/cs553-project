@@ -23,6 +23,10 @@ async function getPost(id) {
     let sql = 'SELECT * FROM posts WHERE id = ?;'
     return await con.query(sql, [id])
 }
+async function getPostsByUserId(user_id) {
+    let sql = 'SELECT * FROM posts WHERE user_id = ?;'
+    return await con.query(sql, [user_id])
+}
 
 //edit post
 async function editPostTitle(id, newTitle) {
@@ -46,5 +50,6 @@ module.exports = {
     getPost,
     editPostTitle,
     editPostContent,
-    deletePost
+    deletePost,
+    getPostsByUserId
 }
