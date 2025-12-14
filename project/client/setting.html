@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>settings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-bar"></div>
+    <div class="base-grid">
+        <form id="setting-form" class="base-block">
+            <form id="setting-edit-name" class="base-block">
+                <p class="base-item">edit name</p>
+
+                <input type="text" placeholder="New Name" class="input-field"/>
+
+                <button id="name-button" class="base-button">change name</button>
+            </form>
+            <form id="setting-edit-password" class="base-block">
+                <p class="base-item">edit password</p>
+
+                <input type="password" placeholder="Old Password" class="input-field"/>
+
+                <input type="password" placeholder="New Password" class="input-field"/>
+
+                <button id="password-button" class="base-button">change password</button>
+            </form>
+            <form id="setting-edit-email" class="base-block">
+                <p class="base-item">edit email</p>
+
+                <input type="text" placeholder="New Email" class="input-field"/>
+
+                <button id="email-button" class="base-button">change email</button>
+            </form>
+            <form id="setting-edit-delete" class="base-block">
+                <p class="base-item">delete account</p>
+
+                <input type="password" placeholder="Password" class="input-field"/>
+
+                <button id="delete-button" class="base-button">delete account</button>
+        </form>
+    </div>
+    <script type="module" src="./scripts/post.js"></script>
+    <script type="module" src="./scripts/user.js"></script>
+    <script type="module" src="./scripts/main.js"></script>
+</body>
+</html>

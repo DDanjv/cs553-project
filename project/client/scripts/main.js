@@ -7,7 +7,7 @@ let userDisplay
 if(getCurrentUser()) {
   user = getCurrentUser()
   nav.innerHTML = `
-    <a class="nav-link">${user.Username}</a>
+    <a href="./setting.html" class="nav-link">${user.Username}</a>
     <a href="./post.html" class="nav-link">post</a>
     <a class="nav-link" id="logout">LOGOUT</a>
   `;
