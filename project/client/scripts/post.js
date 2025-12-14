@@ -128,10 +128,9 @@ function getPosts() {
 }
 
 function getUserPosts() {
-    postuser.innerHTML = "";
     fetchData(`/post/getUserPosts`, `?user_id=${user.id}`, "GET")
             .then(data => {
-                
+                postuser.innerHTML = "";
                 for (let index = 0; index < data.length; index++) {
                    const div = document.createElement("div");
                    div.className = "base-item-user";
@@ -139,7 +138,6 @@ function getUserPosts() {
                         <p> ${data[index].id} ${data[index].title}</p>
                         <p> ${data[index].content} </p>
                         <p class="base-button-delete">delete post</p>
-                        <p class="base-button-edit"> edit post</p>
                    `;
                    postuser.appendChild(div);
                    div.querySelector(".base-button-delete").addEventListener('click', () => {
