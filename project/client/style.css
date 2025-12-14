@@ -1,6 +1,7 @@
 body{
     background-color: rgba(42, 52, 53, 0.829);
     font-family: "Lucida Console", "Courier New", monospace;
+    min-height: 100vh;
 
 }
 h1{

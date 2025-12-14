@@ -1,10 +1,13 @@
 import { fetchData } from "./main.js"
 
 console.log("post")
+var postform = document.getElementById("post-maker")
+var postViewer = document.getElementById("post-viewer")
+getPosts()
 
-var postform = document.forms[0]
+
+
 console.log(postform)
-
 if(postform){
     postform.addEventListener('submit', post)
 }
@@ -62,10 +65,20 @@ function post(e) {
 function getPosts() {
     fetchData("/post/getAllPost", '', "GET")
             .then(data => {
-                
+                for (let index = 0; index < data.length; index++) {
+                   postViewer.innerHTML += `
+                    <div>
+                        <p> ${data[index].title}</p>
+                        <p> ${data[index].content} </p>
+                    </div>
+                   `
+                    
+                }
             })
             .catch(err => {
                 let errorSection = document.getElementById("error")
                 errorSection.innerText = err.message
             })
 }
+
+

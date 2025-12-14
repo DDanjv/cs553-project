@@ -2,11 +2,23 @@ import { getCurrentUser, removeCurrentUser } from "./user.js";
 
 //navbar implementation
 let nav = document.querySelector(".nav-bar")
+let user 
+let userDisplay
 if(getCurrentUser()) {
+  user = getCurrentUser()
   nav.innerHTML = `
+    <a class="nav-link">${user.Username}</a>
     <a href="./post.html" class="nav-link">post</a>
     <a class="nav-link" id="logout">LOGOUT</a>
-  `
+  `;
+  /*userDisplay = document.createElement("p")
+  userDisplay.id = "userDisplay"
+  userDisplay.textContent = user.Username
+
+  // insert directly AFTER the navbar
+  nav.insertAdjacentElement("afterend", userDisplay)*/
+  
+
 } else {
   nav.innerHTML = `
     <a href="./login.html" class="nav-link">login</a>
